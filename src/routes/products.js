@@ -4,19 +4,16 @@ import { products, nextId } from '../data/db.js';
 
 const router = express.Router();
 
-// CREATE — создать товар
 router.post('/', (req, res) => {
     const product = new Product(nextId(), req.body.name, req.body.price);
     products.push(product);
     res.json(product);
 });
 
-// READ ALL — получить все товары
 router.get('/', (req, res) => {
     res.json(products);
 });
 
-// READ ONE — получить один товар по ID
 router.get('/:id', (req, res) => {
     let found = null;
     for (let p of products) {
@@ -29,7 +26,6 @@ router.get('/:id', (req, res) => {
     }
 });
 
-// UPDATE — обновить товар
 router.put('/:id', (req, res) => {
     let found = null;
     for (let p of products) {
@@ -44,7 +40,6 @@ router.put('/:id', (req, res) => {
     }
 });
 
-// DELETE — удалить товар
 router.delete('/:id', (req, res) => {
     const index = products.findIndex(p => p.id === req.params.id);
     if (index !== -1) {

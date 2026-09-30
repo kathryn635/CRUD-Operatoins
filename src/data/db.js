@@ -1,4 +1,3 @@
-// src/data/db.js
 
 export const products = [];
 export const users = [];

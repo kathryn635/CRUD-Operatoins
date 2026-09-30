@@ -46,7 +46,7 @@ router.delete('/:id', (req, res) => {
         users.splice(index, 1);
         res.json({ message: 'Удалено' });
     } else {
-        res.status(404).json({ error: 'Не найдено' });
+        res.status(404).json({ error: 'Не найденоооо' });
     }
 });
 

@@ -6,10 +6,8 @@ import ordersRouter from './routes/orders.js';
 const app = express();
 const port = 3000;
 
-// ✅ ЭТА СТРОКА ОБЯЗАТЕЛЬНА И ДОЛЖНА БЫТЬ ЗДЕСЬ (до роутеров)
 app.use(express.json()); 
 
-// Подключаем роуты
 app.use('/products', productsRouter);
 app.use('/users', usersRouter);
 app.use('/orders', ordersRouter);
