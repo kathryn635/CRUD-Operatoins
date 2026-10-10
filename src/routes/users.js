@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/', (req, res) => {
     const user = new User(nextId(), req.body.name, req.body.email);
     users.push(user);
-    res.json(user);
+    res.status(201).json(user);
 });
 
 router.get('/', (req, res) => {
@@ -15,28 +15,22 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    let found = null;
-    for (let u of users) {
-        if (u.id === req.params.id) found = u;
-    }
+    const found = users.find(u => u.id === req.params.id);
     if (found) {
         res.json(found);
     } else {
-        res.status(404).json({ error: 'Не найдено' });
+        res.status(404).json({ error: 'Пользователь не найден' });
     }
 });
 
 router.put('/:id', (req, res) => {
-    let found = null;
-    for (let u of users) {
-        if (u.id === req.params.id) found = u;
-    }
+    const found = users.find(u => u.id === req.params.id);
     if (found) {
-        found.name = req.body.name;
-        found.email = req.body.email;
+        if (req.body.name !== undefined) found.name = req.body.name;
+        if (req.body.email !== undefined) found.email = req.body.email;
         res.json(found);
     } else {
-        res.status(404).json({ error: 'Не найдено' });
+        res.status(404).json({ error: 'Пользователь не найден' });
     }
 });
 
@@ -44,9 +38,9 @@ router.delete('/:id', (req, res) => {
     const index = users.findIndex(u => u.id === req.params.id);
     if (index !== -1) {
         users.splice(index, 1);
-        res.json({ message: 'Удалено' });
+        res.json({ message: 'Пользователь удален' });
     } else {
-        res.status(404).json({ error: 'Не найденоооо' });
+        res.status(404).json({ error: 'Пользователь не найден' });
     }
 });
 
